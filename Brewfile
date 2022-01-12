@@ -1,49 +1,45 @@
 tap "homebrew/cask-fonts"
-brew "docker"
 brew "git"
-brew "htop"
-brew "hugo"
-brew "nmap"
+brew "ffmpeg"
+brew "nvm"
 brew "prettyping"
 brew "python3"
-brew "svn"
-brew "tldr"
-brew "tree"
 brew "wget"
-cask "alfred"
-cask "adguard"
-cask "appcleaner"
-cask "cheatsheet"
+brew "yt-dlp"
+cask "asset-catalog-tinkerer"
+cask "carbon-copy-cloner"
 cask "cryptomator"
-cask "font-comic-neue"
-cask "font-fantasque-sans-mono"
-cask "font-fira-code"
-cask "font-hack"
-cask "font-heavy-data-nerd-font"
-cask "font-lato"
-cask "font-roboto"
-cask "font-ubuntu-mono-nerd-font"
-cask "hazel"
-cask "iina"
-cask "iterm2"
-cask "micro-snitch"
-cask "signal"
-cask "steam"
-cask "tor-browser"
+cask "easyfind"
+cask "figma"
+cask "homebrew/cask-versions/1password-beta"
+cask "homebrew/cask-versions/discord-canary"
+cask "imageoptim"
+cask "microsoft-edge-dev"
+cask "monitorcontrol"
+cask "mullvadvpn"
+cask "notion"
+cask "ogdesign-eagle"
+cask "origami-studio"
+cask "parallels"
+cask "pictogram"
+cask "renamer"
+cask "spotify"
+cask "sketch"
 cask "transmission"
-cask "transmit"
 cask "visual-studio-code"
-mas "Amphetamine", id: 937984704
-mas "Affinity Designer", id: 824171161
-mas "Bitwarden", id: 1352778147
-mas "DuckDuckGo", id: 1482920575
-mas "iMovie", id: 408981434
-mas "Magnet", id: 441258766
+cask "zoom"
+mas "Harvest", id: 506189836
+mas "Slack for Desktop", id: 803453959
+mas "1Blocker: Ad Blocker & Privacy", id: 1365531024
+mas "Microsoft Remote Desktop", id: 1295203466
+mas "Testflight", id: 899247664
+mas "The Levelator", id: 1493326487
+mas "The Unarchiever", id: 425424353
+mas "Userscripts", id: 1463298887
+mas "djay - DJ App & AI Mixer", id: 450527929
 mas "Numbers", id: 409203825
 mas "Pages", id: 409201541
+mas "Keynote", id: 409183694
 mas "Pixelmator Pro", id: 1289583905
-mas "PopClip", id: 445189367
-mas "Raivo OTP", id: 1498497896
-mas "Save to Pocket", id: 1477385213
-mas "Spark", id: 1176895641
-mas "The Unarchiever", id: 425424353
+mas "Motion", id: 434290957
+mas "Final Cut Pro", id: 424389933

@@ -19,46 +19,16 @@ sudo -v
 # Keep alive Root
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
-# Install Oh-My-Zsh [1/4]
-printf "📦 Install Zsh...\n"
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-
-# Install Zsh plugins [2/4]
-printf "📦 Install Zsh plugins...\n"
-git clone https://github.com/zsh-users/zsh-completions ${ZSH_CUSTOM:=~/.oh-my-zsh/custom}/plugins/zsh-completions
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-
-# Update Zsh settings [3/4]
-printf "⚙️ Update Zsh settings...\n"
-sudo rm -rf ~/.zshrc > /dev/null 2>&1
-cp $CONFIG/.zshrc ~/.zshrc
-
-# Install iTerm2 themes [4/4]
-printf "📦 Install iTerm2 themes...\n"
-open $CONFIG/ayu-dark.itermcolors
-open $CONFIG/ayu-light.itermcolors
-open $CONFIG/ayu-mirage.itermcolors
-open $CONFIG/nord.itermcolors
-open $CONFIG/nord.terminal
-
 # Install Visual Studio Code plugins [1/2]
 printf "⚙️ Put Visual Studio Code in quarantine to install plugins...\n"
 xattr -dr com.apple.quarantine /Applications/Visual\ Studio\ Code.app
 printf "📦 Install Visual Studio Code plugins...\n"
 open -a "Visual Studio Code"
-code --install-extension arcticicestudio.nord-visual-studio-code
-code --install-extension DavidAnson.vscode-markdownlint
-code --install-extension file-icons.file-icons
-code --install-extension formulahendry.code-runner
-code --install-extension HookyQR.beautify
-code --install-extension ivangabriele.vscode-git-add-and-commit
-code --install-extension knisterpeter.vscode-github
-code --install-extension mikestead.dotenv
-code --install-extension ms-python.python
-code --install-extension teabyii.ayu
-code --install-extension Tyriar.sort-lines
-code --install-extension yzhang.markdown-all-in-one
+code --install-extension github.copilot
+code --install-extension svelte.svelte-vscode
+code --install-extension eseom.nunjucks-template
+code --install-extension ritwickdey.liveserver
+code --install-extension adamhartford.vscode-base64
 
 # Update Visual Studio Code settings [2/2]
 printf "⚙️ Update Visual Studio Code settings...\n"
@@ -74,12 +44,15 @@ cp $CONFIG/.gitconfig ~/.gitconfig
 
 # Configure macOS Finder
 printf "⚙️ Configure Finder...\n"
-defaults write -g AppleShowAllExtensions -bool true
-defaults write com.apple.finder AppleShowAllFiles true
+# defaults write -g AppleShowAllExtensions -bool true
+# defaults write com.apple.finder AppleShowAllFiles true
+defaults write com.apple.finder QLEnableTextSelection -bool true
+defaults write com.apple.finder FXPreferredViewStyle clmv
 defaults write com.apple.finder _FXShowPosixPathInTitle -bool YES
 defaults write com.apple.finder ShowPathbar -bool true
+defaults write com.apple.finder ShowStatusBar -bool true
 chflags nohidden ~/Library
-/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user
+# /System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user
 
 # Configure macOS Screen Capture
 printf "⚙️ Save screenshots in PNG format...\n"
@@ -87,21 +60,11 @@ mkdir ~/Pictures/Screenshots
 defaults write com.apple.screencapture location -string "~/Pictures/Screenshots"
 defaults write com.apple.screencapture type -string "png"
 
-# Configure macOS Keyboard
-printf "⚙️ Configure Keyboard...\n"
-defaults write -g NSAutomaticSpellingCorrectionEnabled -bool false
-defaults write -g NSAutomaticPeriodSubstitutionEnabled -bool false
-defaults write -g NSAutomaticDashSubstitutionEnabled -bool false
-defaults write -g NSAutomaticQuoteSubstitutionEnabled -bool false
-defaults write NSGlobalDomain KeyRepeat -int 1
-defaults write NSGlobalDomain InitialKeyRepeat -int 10
-defaults write com.apple.messageshelper.MessageController SOInputLineSettings -dict-add "continuousSpellCheckingEnabled" -bool false
-
 # Configure macOS Safari
 printf "⚙️ Configure Safari...\n"
-defaults write com.apple.Safari UniversalSearchEnabled -bool false
-defaults write com.apple.Safari SuppressSearchSuggestions -bool true
-defaults write com.apple.Safari WebAutomaticSpellingCorrectionEnabled -bool false
+# defaults write com.apple.Safari UniversalSearchEnabled -bool false
+# defaults write com.apple.Safari SuppressSearchSuggestions -bool true
+# defaults write com.apple.Safari WebAutomaticSpellingCorrectionEnabled -bool false
 defaults write com.apple.Safari AutoOpenSafeDownloads -bool false
 defaults write com.apple.Safari ShowFavoritesBar -bool true
 defaults write com.apple.Safari IncludeDevelopMenu -bool true
@@ -114,21 +77,42 @@ defaults write com.apple.TextEdit PlainTextEncodingForWrite -int 4
 
 # Configure macOS Trackpad
 printf "⚙️ Configure Trackpad...\n"
-defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
-defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
-defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
-defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadCornerSecondaryClick -int 2
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadFiveFingerPinchGesture -int 2
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadFourFingerHorizSwipeGesture -int 2
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadFourFingerPinchGesture -int 2
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadFourFingerVertSwipeGesture -int 2
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadHandResting -int 1
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadHorizScroll -int 1
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadMomentumScroll -int 1
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadPinch -int 1
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadRightClick -int 0
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadRotate -int 1
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadScroll -int 1
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerDrag -int 0
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerHorizSwipeGesture -int 0
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerTapGesture -int 0
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerVertSwipeGesture -int 2
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadTwoFingerDoubleTapGesture -int 1
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadTwoFingerFromRightEdgeSwipeGesture -int 3
+# defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+# defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+# defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false
 
 # Configure macOS
 printf "⚙️ Various configuration...\n"
 defaults write com.apple.gamed Disabled -bool true
-sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate on
 defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
+defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
+defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
+defaults write com.apple.dock orientation -string left
+defaults write com.apple.dock mineffect -string suck
+# sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate on
 
 # Create Projects directory
 printf "⚙️ Create Projects directory...\n"
-mkdir ${HOME}/Projects
-chmod 777 ${HOME}/Projects
+mkdir ${HOME}/Tomfoolery/
+chmod 777 ${HOME}/Tomfoolery/
 
 # Check if Python3 is installed via Homebrew
 #if brew ls --versions python3 > /dev/null; then

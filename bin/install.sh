@@ -38,6 +38,9 @@ if test ! $(which brew); then
   # Install Homebrew apps
     printf "📦 Installing Apps...\n"
     brew bundle --file=$SETUP/Brewfile
+  # Install Wayback script
+    printf "📦 Installing Wayback Machine Downloader Ruby script...\n"
+    gem install wayback_machine_downloader
   # Cleanup
     printf "⚙️ Cleanup and final touches...\n"
     brew -v update && brew -v upgrade && mas upgrade && brew -v cleanup --prune=2 && brew doctor && brew -v upgrade --casks --greedy 
@@ -46,6 +49,7 @@ else
     exit
 
 fi
+
 
 # Exit script
 exit
